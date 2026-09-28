@@ -11,7 +11,7 @@ const config: Config = {
         mist: '#f4f7fb',
       },
       fontFamily: {
-        sans: ['var(--font-manrope)', 'var(--font-bengali)', 'Arial', 'sans-serif'],
+        sans: ['var(--font-latin)'],
       },
     },
   },

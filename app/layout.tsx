@@ -1,4 +1,7 @@
 import type { Metadata } from 'next';
+// Premium self-hosted typography (Fontsource) — Bengali-first with a premium Latin companion.
+import '@fontsource-variable/noto-sans-bengali/wght.css'; // variable weight 100–900, bengali + latin subsets
+import '@fontsource-variable/manrope/wght.css'; // variable weight 200–800, latin
 import './globals.css';
 import { ClientProviders } from '@/components/client-providers';
 import { Header } from '@/components/header';
