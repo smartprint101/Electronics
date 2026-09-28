@@ -1,0 +1,16 @@
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { useMemo } from 'react';
+import { formatPrice, getProductImage, products } from '@/lib/data';
+import { useStore } from '@/components/store-provider';
+import { Icon } from '@/components/icons';
+import { ProductGrid } from '@/components/product-card';
+
+export default function ComparePage() {
+  const { compareIds, toggleCompare } = useStore();
+  const selected = useMemo(() => compareIds.map((id) => products.find((product) => product.id === id)).filter(Boolean), [compareIds]);
+  const specKeys = Array.from(new Set(selected.flatMap((product) => product?.specifications.map((spec) => spec.key) ?? [])));
+  return <section className="compare-page"><div className="container"><div className="breadcrumbs"><Link href="/">হোম</Link><span>/</span><span>তুলনা করুন</span></div><div className="compare-heading"><div><h1>পণ্য তুলনা করুন</h1><p>একসঙ্গে সর্বোচ্চ ৩টি product-এর specification, warranty ও দাম মিলিয়ে দেখুন।</p></div><div className="compare-actions"><Link href="/shop" className="btn btn-outline">আরও পণ্য যোগ করুন</Link>{selected.length > 0 && <button className="btn btn-outline" onClick={() => selected.forEach((product) => product && toggleCompare(product.id))}>সব সরান</button>}</div></div>{selected.length === 0 ? <div className="compare-empty"><div className="empty-icon" style={{ marginBottom: 15, marginLeft: 'auto', marginRight: 'auto' }}><Icon name="compare" size={26} /></div><h2>তুলনা তালিকা এখনো খালি</h2><p>Product card-এর তুলনা আইকনে চাপ দিয়ে ২–৩টি পণ্য নির্বাচন করুন। এরপর এখানে পাশাপাশি পার্থক্য দেখুন।</p><Link href="/shop" className="btn btn-dark">পণ্য দেখুন <Icon name="arrow-right" size={16} /></Link></div> : <div className="compare-table-wrap"><table className="compare-table"><thead><tr><th>বৈশিষ্ট্য</th>{selected.map((product) => product && <th key={product.id}><div className="compare-product-img"><Image src={getProductImage(product)} alt={product.name} fill sizes="200px" /></div><Link href={`/product/${product.slug}`} className="compare-product-name">{product.name}</Link><div className="compare-product-price">{formatPrice(product.price)}</div><button className="compare-remove" onClick={() => toggleCompare(product.id)}><Icon name="close" size={13} /> সরান</button></th>)}</tr></thead><tbody><tr><td>ব্র্যান্ড</td>{selected.map((product) => product && <td key={product.id}>{product.brand}</td>)}</tr>{specKeys.map((key) => <tr key={key}><td>{key}</td>{selected.map((product) => { const value = product?.specifications.find((spec) => spec.key === key)?.value; return <td key={product?.id}>{value ?? '—'}</td>; })}</tr>)}<tr><td>ওয়ারেন্টি</td>{selected.map((product) => product && <td key={product.id}>{product.warranty.label}</td>)}</tr><tr><td>ক্যাশ অন ডেলিভারি</td>{selected.map((product) => product && <td key={product.id}>{product.codAvailable ? 'প্রযোজ্য' : 'প্রযোজ্য নয়'}</td>)}</tr><tr><td>রেটিং</td>{selected.map((product) => product && <td key={product.id}><span className="stars">★</span> {product.rating} ({product.reviews})</td>)}</tr></tbody></table></div>}</div>{selected.length === 0 && <div className="container compare-suggest"><div className="section-heading"><div><p className="eyebrow">সিদ্ধান্ত নেওয়া সহজ হোক</p><h2>জনপ্রিয় পণ্য</h2></div></div><ProductGrid products={products.slice(0, 4)} /></div>}</section>;
+}
