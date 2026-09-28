@@ -6,6 +6,7 @@ import { useState, type FormEvent } from 'react';
 import { config } from '@/lib/data';
 import { useStore } from './store-provider';
 import { Icon } from './icons';
+import { LogoMark } from './logo';
 
 const navItems = [
   { label: 'হোম', href: '/' },
@@ -38,7 +39,7 @@ export function Header() {
     <header className="site-header">
       <div className="container header-main">
         <button className="icon-btn mobile-menu-btn" aria-label="মেনু" onClick={() => setMobileOpen((value) => !value)}><Icon name={mobileOpen ? 'close' : 'menu'} size={22} /></button>
-        <Link href="/" className="brand" aria-label="TECHORA হোম"><span className="brand-mark"><span /></span><span className="brand-word">TECHORA</span></Link>
+        <Link href="/" className="brand" aria-label="TECHORA হোম"><LogoMark size={33} gradientId="logo-gradient-header" /><span className="brand-word">TECH<span className="brand-accent">ORA</span></span></Link>
         <form className={`header-search ${searchOpen ? 'mobile-search-open' : ''}`} onSubmit={submitSearch}>
           <Icon name="search" size={19} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="পণ্য, ব্র্যান্ড বা মডেল খুঁজুন" aria-label="পণ্য খুঁজুন" /><button type="submit">খুঁজুন</button>
         </form>

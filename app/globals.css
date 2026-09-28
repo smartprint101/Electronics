@@ -15,31 +15,29 @@ button { cursor: pointer; }
 .announcement-dot { display: inline-block; width: 6px; height: 6px; border-radius: 99px; background: #35d0b0; margin-right: 7px; box-shadow: 0 0 0 3px rgba(53,208,176,.12); }
 .announcement-note { color: #8797ab; }
 .site-header { background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 30; backdrop-filter: blur(14px); }
-.header-main { min-height: 75px; display: flex; align-items: center; gap: 30px; }
-.brand { display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0; }
-.brand-word { font-family: var(--font-latin); font-size: 20px; font-weight: 800; letter-spacing: .18em; }
-.brand-mark { width: 25px; height: 25px; border: 2px solid var(--blue); display: inline-block; position: relative; transform: rotate(45deg); border-radius: 6px; }
-.brand-mark::before, .brand-mark::after, .brand-mark span { content: ''; position: absolute; background: var(--blue); }
-.brand-mark::before { width: 10px; height: 2px; top: 9px; left: 5px; transform: rotate(-45deg); }
-.brand-mark::after { height: 10px; width: 2px; top: 5px; left: 9px; transform: rotate(-45deg); }
-.brand-mark span { width: 5px; height: 5px; top: 8px; left: 8px; border-radius: 50%; }
-.header-search { height: 44px; border: 1px solid #dae2ec; border-radius: 5px; display: flex; align-items: center; color: #8290a1; flex: 1; max-width: 495px; background: #fbfcfe; }
+.header-main { min-height: 82px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; }
+.brand { grid-column: 2; grid-row: 1; justify-self: center; display: inline-flex; align-items: center; gap: 11px; flex-shrink: 0; }
+.logo-mark { display: block; border-radius: 11px; filter: drop-shadow(0 6px 14px rgba(23,105,255,.3)); transition: transform .25s ease; }
+.brand:hover .logo-mark { transform: scale(1.05) rotate(-3deg); }
+.brand-word { font-family: var(--font-latin); font-size: 19px; font-weight: 800; letter-spacing: .13em; color: var(--navy); }
+.brand-accent { color: var(--blue); }
+.header-search { grid-column: 1; grid-row: 1; justify-self: start; height: 44px; border: 1px solid #dae2ec; border-radius: 5px; display: flex; align-items: center; color: #8290a1; width: 100%; max-width: 450px; background: #fbfcfe; }
 .header-search svg { margin: 0 10px 0 13px; }
 .header-search input { border: 0; outline: 0; background: transparent; flex: 1; min-width: 0; color: var(--ink); font-size: 13px; }
 .header-search button { height: 100%; padding: 0 16px; background: var(--navy); color: white; border: 0; border-radius: 0 4px 4px 0; font-size: 12px; }
-.header-actions { margin-left: auto; display: flex; gap: 19px; align-items: center; }
+.header-actions { grid-column: 3; grid-row: 1; justify-self: end; display: flex; gap: 19px; align-items: center; }
 .header-action { display: flex; flex-direction: column; align-items: center; gap: 0; color: #4e5d6e; font-size: 10px; white-space: nowrap; }
 .header-action svg { color: #15283d; }
 .action-icon-wrap { position: relative; display: inline-flex; }
 .action-icon-wrap b { position: absolute; top: -6px; right: -9px; min-width: 15px; height: 15px; padding: 0 3px; display: grid; place-items: center; color: white; background: var(--blue); border-radius: 99px; font-size: 9px; font-family: var(--font-latin); }
 .search-trigger, .mobile-menu-btn { display: none; background: transparent; border: 0; padding: 0; }
-.nav-row { min-height: 42px; display: flex; align-items: center; justify-content: space-between; }
+.nav-row { min-height: 44px; display: flex; align-items: center; justify-content: center; position: relative; }
 .nav-row nav { display: flex; align-items: stretch; height: 42px; gap: 27px; }
 .nav-row nav a { color: #596778; font-size: 12px; display: flex; align-items: center; position: relative; white-space: nowrap; }
 .nav-row nav a::after { content: ''; height: 2px; position: absolute; left: 0; right: 0; bottom: 0; transform: scaleX(0); background: var(--blue); transition: transform .2s ease; }
 .nav-row nav a:hover, .nav-row nav a.active { color: var(--blue); }
 .nav-row nav a:hover::after, .nav-row nav a.active::after { transform: scaleX(1); }
-.nav-offer { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--blue); font-weight: 700; }
+.nav-offer { position: absolute; right: 0; display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--blue); font-weight: 700; }
 .mobile-quick-links { display: none; }
 main { min-height: 60vh; }
 .hero { background: var(--mist); min-height: 490px; display: flex; position: relative; overflow: hidden; }
@@ -184,6 +182,7 @@ main { min-height: 60vh; }
 .site-footer { background: var(--ink); color: #dce5ee; }
 .footer-top { padding: 62px 0 48px; display: grid; grid-template-columns: 1.45fr .8fr .95fr 1.15fr; gap: 40px; }
 .footer-brand { color: white; }
+.footer-brand .brand-accent { color: var(--cyan); }
 .footer-brand-col > p { color: #8998aa; font-size: 12px; margin: 15px 0 18px; }
 .footer-socials { display: flex; gap: 7px; }
 .footer-socials a { width: 26px; height: 26px; display: grid; place-items: center; border: 1px solid #3a4b5f; color: #a9b8c8; font: 700 11px var(--font-latin); }
@@ -408,6 +407,7 @@ main { min-height: 60vh; }
   .container { width: min(100% - 32px, 900px); }
   .nav-row nav { gap: 16px; }
   .header-main { gap: 18px; }
+  .nav-row:not(.nav-open) .nav-offer { display: none; }
   .product-grid { grid-template-columns: repeat(3, 1fr); }
   .brand-grid { grid-template-columns: repeat(5, 1fr); }
   .brand-pill:nth-child(5) { border-right: 0; }
@@ -419,15 +419,12 @@ main { min-height: 60vh; }
   .announcement-inner { min-height: 29px; }
   .announcement-note { display: none; }
   .site-header { position: sticky; }
-  .header-main { min-height: 65px; gap: 12px; }
-  .mobile-menu-btn { display: inline-grid; place-items: center; color: var(--ink); }
+  .header-main { min-height: 66px; gap: 10px; }
+  .mobile-menu-btn { grid-column: 1; grid-row: 1; justify-self: start; display: inline-grid; place-items: center; color: var(--ink); }
   .brand { gap: 8px; }
-  .brand-word { font-size: 16px; letter-spacing: .13em; }
-  .brand-mark { width: 21px; height: 21px; }
-  .brand-mark::before { width: 8px; top: 7px; left: 4px; }
-  .brand-mark::after { height: 8px; top: 4px; left: 7px; }
-  .brand-mark span { width: 4px; height: 4px; top: 6px; left: 6px; }
-  .header-search { position: absolute; top: 64px; left: 14px; right: 14px; max-width: none; display: none; z-index: 3; box-shadow: 0 12px 20px rgba(10,30,50,.08); }
+  .brand-word { font-size: 16px; letter-spacing: .12em; }
+  .brand .logo-mark { width: 28px; height: 28px; }
+  .header-search { position: absolute; top: 66px; left: 14px; right: 14px; width: auto; max-width: none; display: none; z-index: 3; box-shadow: 0 12px 20px rgba(10,30,50,.08); }
   .header-search.mobile-search-open { display: flex; }
   .header-actions { gap: 13px; }
   .hide-on-mobile { display: none; }
@@ -435,11 +432,11 @@ main { min-height: 60vh; }
   .header-action > span:last-child { display: none; }
   .cart-action > span:last-child { display: none; }
   .nav-row { display: none; }
-  .nav-row.nav-open { display: block; position: absolute; top: 65px; left: 0; right: 0; width: 100%; background: white; box-shadow: 0 15px 30px rgba(8,26,46,.12); border-top: 1px solid var(--line); }
+  .nav-row.nav-open { display: block; position: absolute; top: 66px; left: 0; right: 0; width: 100%; background: white; box-shadow: 0 15px 30px rgba(8,26,46,.12); border-top: 1px solid var(--line); }
   .nav-row.nav-open nav { display: grid; grid-template-columns: 1fr 1fr; gap: 0; height: auto; padding: 6px 14px; }
   .nav-row.nav-open nav a { min-height: 42px; border-bottom: 1px solid #f0f3f7; font-size: 12px; }
   .nav-row.nav-open nav a::after { display: none; }
-  .nav-offer { margin: 10px 14px 15px; }
+  .nav-offer { position: static; margin: 10px 14px 15px; }
   .mobile-quick-links { display: flex; gap: 10px; position: absolute; top: 251px; left: 0; right: 0; background: white; z-index: 29; padding: 0 14px 15px; box-shadow: 0 15px 30px rgba(8,26,46,.12); }
   .mobile-quick-links a { display: flex; align-items: center; gap: 5px; color: #5b6a7d; font-size: 10px; }
   .mobile-quick-links svg { color: var(--blue); }
@@ -587,6 +584,7 @@ main { min-height: 60vh; }
 @media (max-width: 380px) {
   .header-main { gap: 8px; }
   .brand-word { font-size: 14px; }
+  .brand .logo-mark { width: 25px; height: 25px; }
   .header-actions { gap: 8px; }
   .hero h1 { font-size: 34px; }
   .product-media { height: 145px; }
